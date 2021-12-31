@@ -13,24 +13,24 @@ pipeline {
                 }
             }
 			
-			stage('Dockerhub login') {
-                steps {
-					      sh 'docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY'
+	    stage('Dockerhub login') {
+		    steps {
+			    sh 'docker login -u $dockerhub_USER -p $dockerhub_PASSWORD $CI_REGISTRY'
                 }
             }
 			
-			stage('Docker Build') {
+	    stage('Docker Build') {
                 steps {
                 sh 'docker build -t $CONTAINER_TEST_IMAGE .'
                 sh 'docker push $CONTAINER_TEST_IMAGE'
                  }
             }
 
-        stage('Docker run') {
-            steps {
-                sh 'docker run -d -p 3000:3000 $CONTAINER_TEST_IMAGE"
-            }
-        }
+		stage('Docker run') {
+		    steps {
+			sh 'docker run -d -p 3000:3000 $CONTAINER_TEST_IMAGE"
+		    }
+		}
 
 			stage('Cleaning Up') {
                 steps{
