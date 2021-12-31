@@ -1,7 +1,6 @@
 pipeline {
     environment {
       CONTAINER_TEST_IMAGE=  "manohar21/docker_automation"
-      CONTAINER_RELEASE_IMAGE= $CI_REGISTRY_IMAGE:latest
       dockerImage = ''
     }
 
